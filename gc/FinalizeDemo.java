@@ -3,7 +3,7 @@ package gc;
  
 /**
  * 
- * @author yli
+ * @author jh
  *
  */
 public class FinalizeDemo {
