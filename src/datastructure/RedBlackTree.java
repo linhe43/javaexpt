@@ -38,7 +38,8 @@ public class RedBlackTree<T extends Comparable<T>> {
      * @return
      */
     public long getSize() {
-        return size.get();
+//        return size.get();
+        return 0;
     }
     /**
      * get the root node
@@ -154,7 +155,7 @@ public class RedBlackTree<T extends Comparable<T>> {
                     getRoot().setRed(false);
                     getRoot().setParent(null);
                 }
-                size.decrementAndGet();
+//                size.decrementAndGet();
                 return dataRoot.getValue();
             }
         }
@@ -279,7 +280,7 @@ public class RedBlackTree<T extends Comparable<T>> {
             root.setLeft(node);
             //root node is black
             node.setRed(false);
-            size.incrementAndGet();
+//            size.incrementAndGet();
         }else{
             RedBlackTreeNode<T> x = findParentNode(node);
             int cmp = x.getValue().compareTo(node.getValue());
@@ -302,7 +303,7 @@ public class RedBlackTree<T extends Comparable<T>> {
             }
 
             fixInsert(node);
-            size.incrementAndGet();
+//            size.incrementAndGet();
         }
         return null;
     }
