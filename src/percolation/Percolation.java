@@ -18,6 +18,10 @@ public class Percolation {
      * @param n
      */
     public Percolation(int n) {
+        if (n <= 0) {
+            throw new IllegalArgumentException();
+        }
+
         this.n = n;
         head = 0;
         tail = n * n + 1;
@@ -113,39 +117,6 @@ public class Percolation {
      */
     private int posToIdx(int row, int col) {
         return (row - 1) * n + col;
-    }
-
-    public boolean[][] getStatusMat() {
-        return statusMat;
-    }
-
-    public static void printMat(boolean[][] mat) {
-        int rNum = mat.length, cNum = mat[0].length;
-        for (int i = 0; i < rNum; i++) {
-            for (int j = 0; j < cNum; j++) {
-                if (mat[i][j]) {
-                    System.out.print('o');
-                } else {
-                    System.out.print('x');
-                }
-            }
-            System.out.println();
-        }
-        System.out.println();
-    }
-
-    public final static void clearConsole() {
-        try {
-            final String os = System.getProperty("os.name");
-
-            if (os.contains("Windows")) {
-                Runtime.getRuntime().exec("cls");
-            } else {
-                Runtime.getRuntime().exec("clear");
-            }
-        } catch (final Exception e) {
-            //  Handle any exceptions.
-        }
     }
 
     public static void main(String[] args) {
