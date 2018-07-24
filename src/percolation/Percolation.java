@@ -2,16 +2,14 @@ package percolation;
 
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
-import java.util.Random;
-
 public class Percolation {
 
-    private int n;
-    private int head, tail;
+    private final int n;
+    private final int head, tail;
     private boolean[][] statusMat;
     private int openSiteNum = 0;
 
-    private WeightedQuickUnionUF uf;
+    private final WeightedQuickUnionUF uf;
 
     /**
      * create n-by-n grid, with all sites blocked
@@ -80,7 +78,7 @@ public class Percolation {
      * @return
      */
     public boolean isOpen(int row, int col) {
-        return statusMat[row - 1][col - 1];
+        return isValid(row, col) && statusMat[row - 1][col - 1];
     }
 
     /**
@@ -90,7 +88,7 @@ public class Percolation {
      * @return
      */
     public boolean isFull(int row, int col) {
-        return uf.connected(head, posToIdx(row, col));
+        return isValid(row, col) && uf.connected(head, posToIdx(row, col));
     }
 
     /**
@@ -110,6 +108,15 @@ public class Percolation {
     }
 
     /**
+     * check validation of row and col
+     * @return
+     */
+
+    private boolean isValid(int row, int col) {
+        return row > 0 && row <= n && col > 0 && col <= n;
+    }
+
+    /**
      * calculate the array index from (row, col)
      * @param row
      * @param col
@@ -119,24 +126,4 @@ public class Percolation {
         return (row - 1) * n + col;
     }
 
-    public static void main(String[] args) {
-        int MAX_ITER_NUM = 10000;
-        int n = 20;
-        double avgFrac = 0;
-        int iterNum = 0;
-        while (iterNum++ < MAX_ITER_NUM) {
-            Percolation p = new Percolation(n);
-            Random rand = new Random(System.currentTimeMillis());
-            while (true) {
-                int row = rand.nextInt(n) + 1, col = rand.nextInt(n) + 1;
-                p.open(row, col);
-                if (p.percolates()) {
-                    avgFrac += (double) p.numberOfOpenSites() / (n * n);
-                    break;
-                }
-            }
-        }
-
-        System.out.println(avgFrac / MAX_ITER_NUM);
-    }
 }

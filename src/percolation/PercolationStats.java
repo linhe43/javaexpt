@@ -5,11 +5,12 @@ import edu.princeton.cs.algs4.StdStats;
 
 public class PercolationStats {
 
-    private int trials;
-    private int n;
+    private static final double CONFIDENCE_95 = 1.96;
 
-    private double mu;
-    private double sigma;
+    private final int trials;
+
+    private final double mu;
+    private final double sigma;
 
     /**
      * perform trials independent experiments on an b-by-n grid
@@ -21,7 +22,6 @@ public class PercolationStats {
             throw new IllegalArgumentException();
         }
 
-        this.n = n;
         this.trials = trials;
 
         double[] rArr = new double[trials];
@@ -62,7 +62,7 @@ public class PercolationStats {
      * @return
      */
     public double confidenceLo() {
-        return mu - 1.96 * sigma / Math.sqrt(trials);
+        return mu - CONFIDENCE_95 * sigma / Math.sqrt(trials);
     }
 
     /**
@@ -70,11 +70,25 @@ public class PercolationStats {
      * @return
      */
     public double confidenceHi() {
-        return mu + 1.96 * sigma / Math.sqrt(trials);
+        return mu + CONFIDENCE_95 * sigma / Math.sqrt(trials);
     }
 
     public static void main(String[] args) {
-        PercolationStats ps = new PercolationStats(100, 200);
+        if (args == null || args.length != 2) {
+            System.out.println("Usage: percolation.PercolationStats n trials");
+            return;
+        }
+
+        int n, trials;
+        try {
+            n = Integer.parseInt(args[0]);
+            trials = Integer.parseInt(args[1]);
+        } catch (NumberFormatException e) {
+            System.err.println("Argument error");
+            return;
+        }
+
+        PercolationStats ps = new PercolationStats(n, trials);
         System.out.format("mean\t\t\t\t\t= %f\nstddev\t\t\t\t\t= %f\n95 confidence interval\t= [%f, %f]",
                 ps.mean(), ps.stddev(), ps.confidenceLo(), ps.confidenceHi());
     }
