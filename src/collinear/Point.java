@@ -1,4 +1,4 @@
-/******************************************************************************
+package collinear; /******************************************************************************
  *  Compilation:  javac Point.java
  *  Execution:    java Point
  *  Dependencies: none
@@ -8,7 +8,6 @@
  *
  ******************************************************************************/
 
-import java.util.Arrays;
 import java.util.Comparator;
 import edu.princeton.cs.algs4.StdDraw;
 
@@ -124,11 +123,10 @@ public class Point implements Comparable<Point> {
 
     private class CmpBySlope implements Comparator<Point> {
         public int compare(Point p1, Point p2) {
-            double slope1 = slopeTo(p1);
-            double slope2 = slopeTo(p2);
-            if (slope1 == slope2) return 0;
-            if (slope1 < slope2) return -1;
-            return 1;
+            double diff = slopeTo(p1) - slopeTo(p2);
+            if (diff > 0) return 1;
+            if (diff < 0) return -1;
+            return 0;
         }
     }
 
@@ -136,23 +134,20 @@ public class Point implements Comparable<Point> {
      * Unit tests the Point data type.
      */
     public static void main(String[] args) {
-        Point[] ptsArr = new Point[] {
-                new Point(1, 1),
-                new Point(2, 8),
-                new Point(1, 4),
-                new Point(-3, 1),
-                new Point(2, 2),
-                new Point(1, 1),
-                new Point(4, 2)
-        };
-        for (int i = 1; i < ptsArr.length; i++) {
-            System.out.println("slope2 = " + ptsArr[0].slopeTo(ptsArr[i]));
-        }
+        Point p = new Point(428, 99);
+        Point q = new Point(312, 119);
+        Point r = new Point(457, 94);
 
-        Arrays.sort(ptsArr);
-        for (int i = 0; i < ptsArr.length; i++) {
-            System.out.println(ptsArr[i].toString());
-        }
-
+        System.out.println(p.slopeOrder().compare(q, r));
+        System.out.println(p.slopeOrder().compare(q, r));
+        System.out.println(p.slopeTo(q));
+        System.out.println(p.slopeTo(r));
+//        p                         = (428, 99)
+//        q                         = (312, 119)
+//        r                         = (457, 94)
+//        student   p.compare(q, r) = 1
+//        reference p.compare(q, r) = 0
+//        reference p.slopeTo(q)    = -0.1724137931034483
+//        reference p.slopeTo(r)    = -0.1724137931034483
     }
 }
