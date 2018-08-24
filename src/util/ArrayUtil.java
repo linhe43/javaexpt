@@ -12,6 +12,16 @@ public class ArrayUtil {
         System.out.println();
     }
 
+    public static void print(int[] arr) {
+        if (arr == null)
+            throw new NullPointerException();
+
+        for (int t : arr) {
+            System.out.print(t + " ");
+        }
+        System.out.println();
+    }
+
     public static <T> void println(T[] arr) {
         if (arr == null)
             throw new NullPointerException();

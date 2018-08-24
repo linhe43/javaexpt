@@ -12,6 +12,16 @@ public class MatrixUtil {
         }
     }
 
+    public static void print(int[][] mat) {
+        if (mat == null || mat.length == 0) return;
+        for (int[] row : mat) {
+            for (int t : row) {
+                System.out.print(t + " ");
+            }
+            System.out.println();
+        }
+    }
+
     public static void main(String[] args) {
         String[][] mat = new String[][] {
                 {"1", "2", "3", "4"},

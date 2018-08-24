@@ -1,5 +1,3 @@
-package unittest;
-
 public class UnitTestDemo {
 
     public int func(int n) {
