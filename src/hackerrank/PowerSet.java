@@ -1,7 +1,6 @@
 package hackerrank;
 
 import util.ArrayUtil;
-import util.ListUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,7 +45,7 @@ public class PowerSet {
         List<String[]> pSet = new PowerSet().getPowerSet(set);
 
         for (String[] arr : pSet) {
-            ArrayUtil.printArray(arr);
+            ArrayUtil.print(arr);
         }
     }
 }
