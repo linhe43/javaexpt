@@ -11,7 +11,8 @@ package uber;
  */
 
 public class KthSmallestSquare {
-    public static void main(String args[] ) throws Exception {
+
+    public static void main(String args[] ) {
         int[] arr = new int[] {-9, -8, -4, -3, -1, 2, 5, 6, 10};
         int k = 2;
 
